@@ -29,9 +29,25 @@ if ( ! class_exists( 'Slider' ) ) {
             define( 'SLIDER_URL', plugin_dir_url( __FILE__ ) );
             define( 'SLIDER_VERSION', '1.0.0' );
         }
+
+        public static function activate() {
+            update_option( 'rewrite_rules', '' );
+        }
+
+        public static function deactivate() {
+            flush_rewrite_rules();
+        }
+
+        public static function uninstall() {
+
+        }
     }
 }
 
 if ( class_exists( 'Slider' ) ) {
+    register_activation_hook( __FILE__, array( 'Slider', 'activate' ) );
+    register_deactivation_hook( __FILE__, array( 'Slider', 'deactivate' ) );
+    register_uninstall_hook( __FILE__, array( 'Slider', 'uninstall' ) );
+
     $slider = new Slider();
 }
