@@ -17,3 +17,15 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
+
+if ( ! class_exists( 'Slider' ) ) {
+    class Slider {
+        function __construct() {
+            
+        }
+    }
+}
+
+if ( class_exists( 'Slider' ) ) {
+    $slider = new Slider();
+}
