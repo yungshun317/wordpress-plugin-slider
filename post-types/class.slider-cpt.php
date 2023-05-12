@@ -33,5 +33,20 @@ if ( ! class_exists( 'Slider_Post_Type' ) ) {
                 )
             );
         }
+
+        public function add_meta_boxes() {
+            add_meta_box(
+                'slider_meta_box',
+                'Link Options',
+                array( $this, 'add_inner_meta_boxes' ),
+                'slider',
+                'normal',
+                'high'
+            );
+        }
+
+        public function add_inner_meta_boxes( $post ) {
+
+        }
     }
 }
