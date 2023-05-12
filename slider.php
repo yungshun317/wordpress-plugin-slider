@@ -22,6 +22,9 @@ if ( ! class_exists( 'Slider' ) ) {
     class Slider {
         function __construct() {
             $this->define_constants();
+
+            require_once( SLIDER_PATH . 'post-types/class.slider-cpt.php' );
+            $Slider_Post_Type = new Slider_Post_Type();
         }
 
         public function define_constants() {
@@ -36,6 +39,7 @@ if ( ! class_exists( 'Slider' ) ) {
 
         public static function deactivate() {
             flush_rewrite_rules();
+            unregister_post_type( 'slider' );
         }
 
         public static function uninstall() {
