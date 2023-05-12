@@ -65,7 +65,7 @@ if ( ! class_exists( 'Slider_Post_Type' ) ) {
                 }
 
                 if ( empty( $new_link_url ) ) {
-                    update_post_meta( $post_id, 'slider_link_url', '#');
+                    update_post_meta( $post_id, 'slider_link_url', '#' );
                 } else {
                     update_post_meta( $post_id, 'slider_link_url', sanitize_text_field( $new_link_url ), $old_link_url );
                 }
