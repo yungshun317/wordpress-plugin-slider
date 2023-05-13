@@ -3,6 +3,7 @@
     $link_text = get_post_meta( $post->ID, 'slider_link_text', true );
     $link_url = get_post_meta( $post->ID, 'slider_link_url', true );
 ?>
+<input type="hidden" name="slider_nonce" value="<?php echo wp_create_nonce( 'slider_nonce' ); ?>">
 <table class="form-table slider-metabox">
     <tr>
         <th>

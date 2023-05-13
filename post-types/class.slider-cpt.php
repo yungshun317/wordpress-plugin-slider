@@ -6,6 +6,9 @@ if ( ! class_exists( 'Slider_Post_Type' ) ) {
             add_action( 'init', array( $this, 'create_post_type' ) );
             add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes') );
             add_action( 'save_post', array( $this, 'save_post'), 10, 2);
+            add_filter( 'manage_slider_posts_columns', array( $this, 'slider_cpt_columns' ));
+            add_action( 'manage_slider_posts_custom_column', array( $this, 'slider_custom_columns' ), 10, 2 );
+            add_filter( 'manage_edit-slider_sortable_columns', array( $this, 'slider_sortable_columns' ) );
         }
 
         public function create_post_type() {
@@ -48,10 +51,28 @@ if ( ! class_exists( 'Slider_Post_Type' ) ) {
         }
 
         public function add_inner_meta_boxes( $post ) {
-            require_once(SLIDER_PATH . 'views/slider-metabox.php');
+            require_once( SLIDER_PATH . 'views/slider-metabox.php' );
         }
 
         public function save_post( $post_id ) {
+            if ( isset( $_POST['slider_nonce'] ) ) {
+                if ( ! wp_verify_nonce( $_POST['slider_nonce'], 'slider_nonce' ) ) {
+                    return;
+                }
+            }
+
+            if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+                return;
+            }
+
+            if ( isset( $_POST['post_type'] ) && $_POST['post_type'] === 'slider' ) {
+                if ( ! current_user_can( 'edit_page', $post_id )) {
+                    return;
+                } elseif ( ! current_user_can( 'edit_post', $post_id ) ) {
+                    return;
+                }
+            }
+
             if ( isset( $_POST['action'] ) && $_POST['action'] == 'editpost' ) {
                 $old_link_text = get_post_meta( $post_id, 'slider_link_text', true );
                 $new_link_text = $_POST['slider_link_text'];
@@ -73,5 +94,26 @@ if ( ! class_exists( 'Slider_Post_Type' ) ) {
             }
         }
 
+        public function slider_cpt_columns( $columns ) {
+            $columns['slider_link_text'] = esc_html__( 'Link Text', 'slider' );
+            $columns['slider_link_url'] = esc_html__( 'Link URL', 'slider' );
+            return $columns;
+        }
+
+        public function slider_custom_columns( $column, $post_id ) {
+            switch( $column ) {
+                case 'slider_link_text':
+                    echo esc_html( get_post_meta( $post_id, 'slider_link_text', true ) );
+                break;
+                case 'slider_link_url':
+                    echo esc_url( get_post_meta( $post_id, 'slider_link_url', true ) );
+                break;
+            }
+        }
+
+        public function slider_sortable_columns( $columns ) {
+            $columns['slider_link_text'] = 'slider_link_text';
+            return $columns;
+        }
     }
 }
