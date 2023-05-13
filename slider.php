@@ -57,6 +57,26 @@ if ( ! class_exists( 'Slider' ) ) {
                 array( $this, 'slider_settings_page' ),
                 'dashicons-images-alt2'
             );
+
+            add_submenu_page(
+                'slider_admin',
+                'Manage Slides',
+                'Manage Slides',
+                'manage_options',
+                'edit.php?post_type=slider',
+                null,
+                null
+            );
+
+            add_submenu_page(
+                'slider_admin',
+                'Add New Slide',
+                'Add New Slide',
+                'manage_options',
+                'post-new.php?post_type=slider',
+                null,
+                null
+            );
         }
 
         public function slider_settings_page() {
