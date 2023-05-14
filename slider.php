@@ -27,6 +27,9 @@ if ( ! class_exists( 'Slider' ) ) {
 
             require_once( SLIDER_PATH . 'post-types/class.slider-cpt.php' );
             $Slider_Post_Type = new Slider_Post_Type();
+
+            require_once( SLIDER_PATH . 'class.slider-settings.php');
+            $Slider_Settings = new Slider_Settings();
         }
 
         public function define_constants() {
