@@ -28,7 +28,7 @@ if ( ! class_exists( 'Slider' ) ) {
             require_once( SLIDER_PATH . 'post-types/class.slider-cpt.php' );
             $Slider_Post_Type = new Slider_Post_Type();
 
-            require_once( SLIDER_PATH . 'class.slider-settings.php');
+            require_once( SLIDER_PATH . 'class.slider-settings.php' );
             $Slider_Settings = new Slider_Settings();
         }
 
@@ -83,7 +83,7 @@ if ( ! class_exists( 'Slider' ) ) {
         }
 
         public function slider_settings_page() {
-            echo 'This is a test page';
+            require( SLIDER_PATH . 'views/settings-page.php' );
         }
     }
 }
