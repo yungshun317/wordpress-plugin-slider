@@ -68,15 +68,49 @@ if ( ! class_exists( 'Slider_Settings' ) ) {
         }
 
         public function slider_title_callback() {
-
+            ?>
+            <input
+                type="text"
+                name="slider_options[slider_title]"
+                id="slider_title"
+                value="<?php echo isset( self::$options['slider_title']) ? esc_attr( self::$options['slider_title']) : ''; ?>"
+            >
+            <?php
         }
 
         public function slider_bullets_callback() {
-
+            ?>
+            <input
+                type="checkbox"
+                name="slider_options[slider_bullets]"
+                id="slider_bullets"
+                value="1"
+                <?php
+                    if( isset( self::$options['slider_bullets'] ) ) {
+                        checked( "1", self::$options['slider_bullets'], true);
+                    }
+                ?>
+            >
+            <label for="slider_bullets">Whether to display bullets or not</label>
+            <?php
         }
 
         public function slider_style_callback() {
-
+            ?>
+            <select
+                id="slider_style"
+                name="slider_options[slider_style]"
+            >
+                <option
+                    value="style-1"
+                    <?php isset( self::$options['slider_style'] ) ? selected( 'style-1', self::$options['slider_style'], true) : ''; ?>
+                >Style-1</option>
+                <option
+                    value="style-2"
+                    <?php isset( self::$options['slider_style'] ) ? selected( 'style-2', self::$options['slider_style'], true) : ''; ?>
+                >Style-2</option>
+            </select>
+            <?php
         }
     }
 }
