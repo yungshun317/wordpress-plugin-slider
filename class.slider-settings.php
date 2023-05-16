@@ -41,7 +41,10 @@ if ( ! class_exists( 'Slider_Settings' ) ) {
                 'Slider Title',
                 array( $this, 'slider_title_callback' ),
                 'slider_page-2',
-                'slider_second_section'
+                'slider_second_section',
+                array(
+                    'label_for' => 'slider_title'
+                )
             );
 
             add_settings_field(
@@ -49,7 +52,10 @@ if ( ! class_exists( 'Slider_Settings' ) ) {
                 'Display Bullets',
                 array( $this, 'slider_bullets_callback' ),
                 'slider_page-2',
-                'slider_second_section'
+                'slider_second_section',
+                array(
+                    'label_for' => 'slider_bullets'
+                )
             );
 
             add_settings_field(
@@ -57,7 +63,14 @@ if ( ! class_exists( 'Slider_Settings' ) ) {
                 'Slider Style',
                 array( $this, 'slider_style_callback' ),
                 'slider_page-2',
-                'slider_second_section'
+                'slider_second_section',
+                array(
+                    'items' => array(
+                        'style-1',
+                        'style-2'
+                    ),
+                    'label_for' => 'slider_style'
+                )
             );
         }
 
@@ -67,7 +80,7 @@ if ( ! class_exists( 'Slider_Settings' ) ) {
             <?php
         }
 
-        public function slider_title_callback() {
+        public function slider_title_callback( $args ) {
             ?>
             <input
                 type="text"
@@ -78,7 +91,7 @@ if ( ! class_exists( 'Slider_Settings' ) ) {
             <?php
         }
 
-        public function slider_bullets_callback() {
+        public function slider_bullets_callback( $args ) {
             ?>
             <input
                 type="checkbox"
@@ -87,7 +100,7 @@ if ( ! class_exists( 'Slider_Settings' ) ) {
                 value="1"
                 <?php
                     if( isset( self::$options['slider_bullets'] ) ) {
-                        checked( "1", self::$options['slider_bullets'], true);
+                        checked( "1", self::$options['slider_bullets'], true );
                     }
                 ?>
             >
@@ -95,20 +108,22 @@ if ( ! class_exists( 'Slider_Settings' ) ) {
             <?php
         }
 
-        public function slider_style_callback() {
+        public function slider_style_callback( $args ) {
             ?>
             <select
                 id="slider_style"
                 name="slider_options[slider_style]"
             >
-                <option
-                    value="style-1"
-                    <?php isset( self::$options['slider_style'] ) ? selected( 'style-1', self::$options['slider_style'], true) : ''; ?>
-                >Style-1</option>
-                <option
-                    value="style-2"
-                    <?php isset( self::$options['slider_style'] ) ? selected( 'style-2', self::$options['slider_style'], true) : ''; ?>
-                >Style-2</option>
+                <?php
+                foreach( $args['items'] as $item ):
+                ?>
+                    <option
+                        value="<?php echo esc_attr( $item ); ?>"
+                        <?php isset( self::$options['slider_style'] ) ? selected( $item, self::$options['slider_style'], true) : ''; ?>
+                    >
+                        <?php echo esc_html( ucfirst( $item ) ); ?>
+                    </option>
+                <?php endforeach; ?>
             </select>
             <?php
         }
