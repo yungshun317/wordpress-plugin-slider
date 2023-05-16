@@ -87,7 +87,7 @@ if ( ! class_exists( 'Slider' ) ) {
                 return;
             }
 
-            if ( isset( $_GET['settings-updated']) ) {
+            if ( isset( $_GET['settings-updated'] ) ) {
                 add_settings_error( 'slider_options', 'slider_message', 'Settings Saved', 'success' );
             }
 
