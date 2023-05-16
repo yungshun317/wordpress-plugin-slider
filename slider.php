@@ -30,6 +30,9 @@ if ( ! class_exists( 'Slider' ) ) {
 
             require_once( SLIDER_PATH . 'class.slider-settings.php' );
             $Slider_Settings = new Slider_Settings();
+
+            require_once( SLIDER_PATH . 'shortcodes/class.slider-shortcode.php' );
+            $Slider_Shortcode = new Slider_Shortcode();
         }
 
         public function define_constants() {
