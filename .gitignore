@@ -51,5 +51,6 @@
 .idea
 
 # Resource
-/fonts
-/img
+/vendor/flexslider/fonts
+/vendor/flexslider/flexslider.css
+/vendor/flexslider/jquery.flexslider-min.js
