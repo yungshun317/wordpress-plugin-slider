@@ -22,6 +22,10 @@ if ( ! class_exists('Slider_Shortcode') ) {
             if ( ! empty( $id ) ) {
                 $id = array_map( 'absint', explode( ',', $id ) );
             }
+
+            ob_start();
+            require( SLIDER_PATH . 'views/slider_shortcode.php' );
+            return ob_get_clean();
         }
     }
 }

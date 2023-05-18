@@ -51,7 +51,7 @@ if ( ! class_exists( 'Slider_Post_Type' ) ) {
         }
 
         public function add_inner_meta_boxes( $post ) {
-            require_once( SLIDER_PATH . 'views/slider-metabox.php' );
+            require_once(SLIDER_PATH . 'views/slider_metabox.php');
         }
 
         public function save_post( $post_id ) {
