@@ -25,6 +25,10 @@ if ( ! class_exists('Slider_Shortcode') ) {
 
             ob_start();
             require( SLIDER_PATH . 'views/slider_shortcode.php' );
+            wp_enqueue_script( 'slider-main-jq' );
+            wp_enqueue_script( 'slider-options-js' );
+            wp_enqueue_style( 'slider-main-css' );
+            wp_enqueue_style( 'slider-style-css' );
             return ob_get_clean();
         }
     }
