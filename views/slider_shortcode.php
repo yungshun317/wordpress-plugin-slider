@@ -25,7 +25,7 @@
             if ( has_post_thumbnail() ) {
                 the_post_thumbnail('full', array( 'class' => 'img-fluid' ) );
             } else {
-                echo "<img src='" . SLIDER_URL . "assets/images/default.jpg' class='img-fluid wp-post-image' />";
+                echo slider_get_placeholder_image();
             }
             ?>
             <div class="slider-container">

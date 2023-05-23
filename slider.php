@@ -23,6 +23,8 @@ if ( ! class_exists( 'Slider' ) ) {
         function __construct() {
             $this->define_constants();
 
+            require_once( SLIDER_PATH . 'functions/functions.php' );
+
             add_action( 'admin_menu', array($this, 'add_menu') );
 
             require_once( SLIDER_PATH . 'post-types/class.slider-cpt.php' );
@@ -104,7 +106,7 @@ if ( ! class_exists( 'Slider' ) ) {
 
         public function register_scripts() {
             wp_register_script( 'slider-main-jq', SLIDER_URL . 'vendor/flexslider/jquery.flexslider-min.js', array( 'jquery' ), SLIDER_VERSION, true );
-            wp_register_script( 'slider-options-js', SLIDER_URL . 'vendor/flexslider/flexslider.js', array( 'jquery' ), SLIDER_VERSION, true );
+            // wp_register_script( 'slider-options-js', SLIDER_URL . 'vendor/flexslider/flexslider.js', array( 'jquery' ), SLIDER_VERSION, true );
             wp_register_style( 'slider-main-css', SLIDER_URL . 'vendor/flexslider/flexslider.css', array(), SLIDER_VERSION, 'all' );
             wp_register_style( 'slider-style-css', SLIDER_URL . 'assets/css/frontend.css', array(), SLIDER_VERSION, 'all' );
         }
