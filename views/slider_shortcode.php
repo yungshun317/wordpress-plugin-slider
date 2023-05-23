@@ -1,7 +1,7 @@
 <h3>
     <?php echo ( ! empty ( $content ) ) ? esc_html( $content ) : esc_html( Slider_Settings::$options['slider_title'] ); ?>
 </h3>
-<div class="slider flexslider">
+<div class="slider flexslider <?php echo ( isset( Slider_Settings::$options['slider_style'] ) ) ? esc_attr( Slider_Settings::$options['slider_style'] ) : 'style-1'; ?>">
     <ul class="slides">
         <?php
 
@@ -21,7 +21,13 @@
             $button_url = get_post_meta( get_the_ID(), 'slider_link_url', true );
         ?>
         <li>
-            <?php the_post_thumbnail('full', array( 'class' => 'img-fluid' ) ); ?>
+            <?php
+            if ( has_post_thumbnail() ) {
+                the_post_thumbnail('full', array( 'class' => 'img-fluid' ) );
+            } else {
+                echo "<img src='" . SLIDER_URL . "assets/images/default.jpg' class='img-fluid wp-post-image' />";
+            }
+            ?>
             <div class="slider-container">
                 <div class="slider-details-container">
                     <div class="wrapper">
