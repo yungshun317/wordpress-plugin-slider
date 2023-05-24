@@ -23,6 +23,8 @@ if ( ! class_exists( 'Slider' ) ) {
         function __construct() {
             $this->define_constants();
 
+            $this->load_textdomain();
+
             require_once( SLIDER_PATH . 'functions/functions.php' );
 
             add_action( 'admin_menu', array($this, 'add_menu') );
@@ -69,6 +71,14 @@ if ( ! class_exists( 'Slider' ) ) {
             foreach( $posts as $post ) {
                 wp_delete_post( $post->ID, true );
             }
+        }
+
+        public function load_textdomain() {
+            load_plugin_textdomain(
+                'slider',
+                false,
+                dirname( plugin_basename( __FILE__ ) ) . '/languages/'
+            );
         }
 
         public function add_menu() {
